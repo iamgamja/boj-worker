@@ -37,16 +37,17 @@ def check(x, n):
 
 
 
-for i in range(8):
-  print('i',i)
-  for j in range(14):
-    for k in range(10):
-      lastcopy = last.copy()
-      lastcopy[i] = lastcopy[i][:j] + str(k) + lastcopy[i][j+1:]
-      # print()
-      # print('\n'.join(lastcopy))
-      # print()
-      score(lastcopy)
+while 1:
+  for i in range(8):
+    print('i',i,'score',last_score)
+    for j in range(14):
+      for k in range(10):
+        lastcopy = last.copy()
+        lastcopy[i] = lastcopy[i][:j] + str(k) + lastcopy[i][j+1:]
+        # print()
+        # print('\n'.join(lastcopy))
+        # print()
+        score(lastcopy)
 
-print('\n'.join(last))
-print(last_score)
+# print('\n'.join(last))
+# print(last_score)
