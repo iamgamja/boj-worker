@@ -8,10 +8,11 @@ def score(x):
   while check(x,r):
     r += 1
   r -= 1
-  global last, last_score
+  global last, last_score, loop
   if last_score < r:
     last = x.copy()
     last_score = r
+    loop = False
     open('output.txt','w').write('\n'.join(last))
     open('score','w').write(str(r))
   return r
@@ -34,20 +35,21 @@ def check(x, n):
             return True
   return False
 
-
-
+loop = False
 
 while 1:
+  loop = True
   for i in range(8):
     print('i',i,'score',last_score)
     for j in range(14):
       for k in range(10):
         lastcopy = last.copy()
         lastcopy[i] = lastcopy[i][:j] + str(k) + lastcopy[i][j+1:]
-        # print()
-        # print('\n'.join(lastcopy))
-        # print()
         score(lastcopy)
-
-# print('\n'.join(last))
-# print(last_score)
+  if loop: # 변하지 않았다면
+    print('reset')
+    open('./save/'+str(last_score),'w').write('\n'.join(last))
+    last = [''.join([str(random.randint(0,9)) for _ in range(14)]) for _ in range(8)]
+    last_score = score(last)
+    open('output.txt','w').write('\n'.join(last))
+    open('score','w').write(str(last_score))
