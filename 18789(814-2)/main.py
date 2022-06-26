@@ -1,4 +1,6 @@
 import random
+from os import walk
+import os
 
 last = open('output.txt','r').read().split()
 last_score = int(open('score','r').read())
@@ -53,3 +55,8 @@ while 1:
     last_score = score(last)
     open('output.txt','w').write('\n'.join(last))
     open('score','w').write(str(last_score))
+    # clean files
+    filenames = next(walk('./save'), (None, None, []))[2]  # [] if no file
+    if len(filenames) > 5:
+      for filename in map(str, sorted( map(int, filenames) )[:-5]):
+        os.remove(f'./save/{filename}')
