@@ -11,7 +11,7 @@ for (let i of txt) {
   console.count()
 
   const target = i.replace(
-    '-[]',
+    '!-',
     ''
   )
 
