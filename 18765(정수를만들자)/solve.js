@@ -40,7 +40,7 @@ module.exports = function solve(txt, target, allowSameLangth=false, debug=true) 
         if(debug)console.log('same')
         is = false
       }
-      if (allowSameLangth?(txt[result].length <= target.length):(txt[result].length <= target.length)) {
+      if (allowSameLangth?(txt[result].length < target.length):(txt[result].length <= target.length)) {
         if(debug)console.log('already', txt[result].length, allowSameLangth?'<':'<=', target.length)
         is = false
       } else {
@@ -51,7 +51,7 @@ module.exports = function solve(txt, target, allowSameLangth=false, debug=true) 
       is = false
     }
   }
-  if(debug)console.log(is ? '✔️ Haee' : '❌ not', 'done', result, target.length)
+  if(debug)console.log(is ? ('✔️ Haee') : '❌ not', 'done', result, target.length)
   if(debug)console.log()
 
   if (is) {

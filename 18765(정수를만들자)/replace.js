@@ -2,10 +2,10 @@ const fs = require('fs')
 
 const solve = require('./solve.js')
 
-const txt = fs
-  .readFileSync('output.txt')
-  .toString()
-  .split('\n')
+const txt = fs.readFileSync('output.txt').toString().split('\n')
+
+const firstLength = txt.join('\n').length
+
 
 for (let i of txt) {
   const target = i.replace(
@@ -23,4 +23,4 @@ for (let i of txt) {
 
 fs.writeFileSync('output.txt', txt.join('\n'))
 
-console.log('📏', txt.join('\n').length)
+console.log('📏', firstLength, '=>', txt.join('\n').length, '('+'-'+(firstLength-txt.join('\n').length)+')')
