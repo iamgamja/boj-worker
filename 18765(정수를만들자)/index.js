@@ -10,7 +10,7 @@ const target = `
 
 
 
-
+[!![]+!![]+[+[]]-!![]-!![]-!![]]*[+!![]+[+[]]]
 
 
 
@@ -29,7 +29,7 @@ const fs = require('fs')
 
 const solve = require('./solve.js')
 
-const txt = fs.readFileSync('output.txt').toString().split('\n')
+const txt = fs.readFileSync('output.txt').toString().replace(/\r\n/g, '\n').split('\n')
 
 const firstLength = txt.join('\n').length
 

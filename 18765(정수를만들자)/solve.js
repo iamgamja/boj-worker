@@ -45,13 +45,14 @@ module.exports = function solve(txt, target, allowSameLangth=false, debug=true) 
         is = false
       } else {
         txt[result] = target
+        console.log('!!', txt[result].length, target.length)
       }
     } else {
       if(debug)console.log('not found', result)
       is = false
     }
   }
-  if(debug)console.log(is ? ('✔️ Haee') : '❌ not', 'done', result, target.length)
+  if(debug)console.log(is ? '✔️ Haee' : '❌ not', 'done', result, target.length)
   if(debug)console.log()
 
   if (is) {
