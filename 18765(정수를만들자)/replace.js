@@ -8,10 +8,12 @@ const firstLength = txt.join('\n').length
 
 
 for (let i of txt) {
-  const target = i.replace(
-    '[+[]]-[]+!![]',
-    '[+!![]]-[]'
-  )
+  // const target = i.replace(
+  //   '[+[]]-[]+!![]',
+  //   '[+!![]]-[]'
+  // )
+
+  const target = i + '*[!![]+!![]]'
 
   solve(txt, target, true, 0)
   solve(txt, target + '+!![]', true, 0)

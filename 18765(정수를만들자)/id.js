@@ -6,7 +6,9 @@ for (let i in x) {
   d[i] = x[i]
 }
 
-const idx = +[...Object.entries(d)].sort((q,w)=>-q[1].length+w[1].length)[0][0]
+const target = process.argv[2] ?? 0
+
+const idx = +[...Object.entries(d)].sort((q,w)=>-q[1].length+w[1].length)[target][0]
 
 console.log()
 console.log(idx-1)
