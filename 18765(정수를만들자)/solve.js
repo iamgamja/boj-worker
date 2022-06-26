@@ -1,4 +1,4 @@
-module.exports = function solve(txt, target, allowSameLangth=false, debug=true) {
+module.exports = function solve(txt, target= false, debug=true) {
   if (!target) return;
 
   const [err, result] = (() => {
@@ -40,12 +40,12 @@ module.exports = function solve(txt, target, allowSameLangth=false, debug=true) 
         if(debug)console.log('same')
         is = false
       }
-      if (allowSameLangth?(txt[result].length < target.length):(txt[result].length <= target.length)) {
-        if(debug)console.log('already', txt[result].length, allowSameLangth?'<':'<=', target.length)
+      if (txt[result].length <= target.length) {
+        if(debug)console.log('already', txt[result].length, '<=', target.length)
         is = false
       } else {
         txt[result] = target
-        console.log('!!', txt[result].length, target.length)
+        if(debug)console.log('!!', txt[result].length, target.length)
       }
     } else {
       if(debug)console.log('not found', result)
@@ -57,22 +57,22 @@ module.exports = function solve(txt, target, allowSameLangth=false, debug=true) 
 
   if (is) {
     let targetcopy = target + '+!![]'
-    while (solve(txt, targetcopy, allowSameLangth,debug)) {
+    while (solve(txt, targetcopy, debug)) {
       targetcopy += '+!![]'
     }
 
     targetcopy = target + '-!![]'
-    while (solve(txt, targetcopy, allowSameLangth,debug)) {
+    while (solve(txt, targetcopy, debug)) {
       targetcopy += '-!![]'
     }
 
     targetcopy = target + '+[]'
-    while (solve(txt, targetcopy, allowSameLangth,debug)) {
+    while (solve(txt, targetcopy, debug)) {
       targetcopy += '+[]'
     }
 
     targetcopy = target + '-[]'
-    while (solve(txt, targetcopy, allowSameLangth,debug)) {
+    while (solve(txt, targetcopy, debug)) {
       targetcopy += '-[]'
     }
   }

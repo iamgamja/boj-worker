@@ -8,18 +8,22 @@ const firstLength = txt.join('\n').length
 
 
 for (let i of txt) {
-  // const target = i.replace(
-  //   '[+[]]-[]+!![]',
-  //   '[+!![]]-[]'
-  // )
+  console.count()
 
-  const target = i + '*[!![]+!![]]'
+  const target = i.replace(
+    '-![]',
+    ''
+  )
 
-  solve(txt, target, true, 0)
-  solve(txt, target + '+!![]', true, 0)
-  solve(txt, target + '-!![]', true, 0)
-  solve(txt, target + '+[]', true, 0)
-  solve(txt, target + '-[]', true, 0)
+  // const target = i + '*[!![]+!![]]'
+
+  // const target = i.slice(0, -3)
+
+  solve(txt, target,           false)
+  solve(txt, target + '+!![]', false)
+  solve(txt, target + '-!![]', false)
+  solve(txt, target + '+[]',   false)
+  solve(txt, target + '-[]',   false)
 
 }
 
