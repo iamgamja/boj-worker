@@ -2,8 +2,15 @@ const fs = require('fs')
 
 const last = {
   last: fs.readFileSync('output.txt').toString().split('\n'),
-  score: +fs.readFileSync('score').toString()
+  score: -1 // default
 }
+
+const loop = {
+  loop: false
+}
+
+score(last.last)
+
 
 function score(x) {
   let r = 0
@@ -14,7 +21,6 @@ function score(x) {
     last.score = r
     loop.loop = false
     fs.writeFileSync('output.txt', last.last.join('\n'))
-    fs.writeFileSync('score', last.score.toString())
   }
   return r
 }
@@ -42,10 +48,6 @@ function check(x, n) {
   return false
 }
 
-const loop = {
-  loop: false
-}
-
 while (1) {
   loop.loop = true
   for ( let i=0; i<8; i++ ) {
@@ -68,7 +70,6 @@ while (1) {
       )
     last.score = score(last.last)
     fs.writeFileSync('output.txt', last.last.join('\n'))
-    fs.writeFileSync('score', last.score.toString())
     // clean files
     let filenames = fs.readdirSync('./save').sort((a,b) => +a - +b)
     if ( filenames.length > 5 ) {
