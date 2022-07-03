@@ -7,11 +7,10 @@
 #include <time.h>
 #include <dirent.h> 
 
-
 #define SIZE (8*(14+1) + 1)
 
 
-void write(char path[], char s[]) {
+void writeFileWithPath(char path[], char s[]) {
   FILE *fp = fopen(path, "w");
   fputs(s, fp);
   fclose(fp);
@@ -28,35 +27,6 @@ void setLast(char s[SIZE]) {
     }
   }
 }
-
-char * getLast() {
-  char result[SIZE];
-  for (int i=0; i<8; i++) {
-    for (int j=0; i<14; j++) {
-      result[i*14+i+j] = last[i][j];
-    }
-    result[i*14+i-1] = '\n';
-  }
-  return result;
-}
-
-void setLastRandom() {
-  //
-}
-
-int getScore(char x[8][14]) {
-  int r = 0;
-  while (check(x, r)) r++;
-  r--;
-  if (score < r) {
-    memcpy(last, x, SIZE);
-    score = r;
-    loop = false;
-    write("output.txt", last);
-  }
-  return r;
-}
-
 
 bool check(char x[8][14], int n) {
   char s[4+1] = {0, };
@@ -95,12 +65,51 @@ bool check(char x[8][14], int n) {
   return false;
 }
 
+int getRandomNumber() {
+  return rand() % 10;
+}
+
+void setLastRandom() {
+  for (int i=0; i<8; i++) {
+    for (int j=0; j<14; j++) {
+      char tmp[2] = {0, };
+      sprintf(tmp, "%d", getRandomNumber());
+      last[i][j] = tmp[0];
+    }
+  }
+}
+
+int getScore(char x[8][14]) {
+  int r = 0;
+  while (check(x, r)) r++;
+  r--;
+  if (score < r) {
+    memcpy(last, x, 112);
+    score = r;
+    loop = false;
+    // get last
+    char last_str[SIZE];
+    for (int i=0; i<8; i++) {
+      for (int j=0; i<14; j++) {
+        last_str[i*14+i+j] = last[i][j];
+      }
+      last_str[i*14+i-1] = '\n';
+    }
+    writeFileWithPath("output.txt", last_str);
+  }
+  return r;
+}
+
+
+
 int compare (const void * a, const void * b) {
   return ( *(int*)a - *(int*)b );
 }
 
 
 int main() {
+  srand(time(NULL));
+
   // read output.txt
   char buffer[SIZE] = {0, };
   FILE *fp = fopen("output.txt", "r");
@@ -132,10 +141,25 @@ int main() {
       char tmp[4+1] = {0, };
       sprintf(tmp, "%d", score);
       memcpy(path+7, tmp, strlen(tmp));
-      write(path, getLast());
+      // get last
+      char last_str[SIZE];
+      for (int i=0; i<8; i++) {
+        for (int j=0; i<14; j++) {
+          last_str[i*14+i+j] = last[i][j];
+        }
+        last_str[i*14+i-1] = '\n';
+      }
+      writeFileWithPath(path, last_str);
       setLastRandom();
       score = getScore(last);
-      write("output.txt", getLast());
+      // get last
+      for (int i=0; i<8; i++) {
+        for (int j=0; i<14; j++) {
+          last_str[i*14+i+j] = last[i][j];
+        }
+        last_str[i*14+i-1] = '\n';
+      }
+      writeFileWithPath("output.txt", last_str);
       // clean files
       int filenames[10];
       DIR *d;
