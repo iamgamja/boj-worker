@@ -22,13 +22,13 @@ bool loop = false;
 
 void setLast(char s[SIZE]) {
   for (int i=0; i<8; i++) {
-    for (int j=0; i<14; j++) {
+    for (int j=0; j<14; j++) {
       last[i][j] = s[i*14+i+j];
     }
   }
 }
 
-bool check(char x[8][14], int n) {
+bool check(char x[][14], int n) {
   char s[4+1] = {0, };
   sprintf(s, "%d", n);
   int sl = strlen(s);
@@ -79,7 +79,7 @@ void setLastRandom() {
   }
 }
 
-int getScore(char x[8][14]) {
+int getScore(char x[][14]) {
   int r = 0;
   while (check(x, r)) r++;
   r--;
@@ -90,7 +90,7 @@ int getScore(char x[8][14]) {
     // get last
     char last_str[SIZE];
     for (int i=0; i<8; i++) {
-      for (int j=0; i<14; j++) {
+      for (int j=0; j<14; j++) {
         last_str[i*14+i+j] = last[i][j];
       }
       last_str[i*14+i-1] = '\n';
@@ -102,15 +102,12 @@ int getScore(char x[8][14]) {
 
 
 
-int compare (const void * a, const void * b) {
+int compare(const void * a, const void * b) {
   return ( *(int*)a - *(int*)b );
 }
 
 
 int main() {
-  printf("Run!");
-  assert(0);
-
   srand(time(NULL));
 
   // read output.txt
@@ -122,7 +119,7 @@ int main() {
   
   getScore(last);
 
-  while (1) {
+  while (true) {
     loop = true;
     for (int i=0; i<8; i++) {
       printf("i: %d, score: %d\n", i, score);
@@ -147,7 +144,7 @@ int main() {
       // get last
       char last_str[SIZE];
       for (int i=0; i<8; i++) {
-        for (int j=0; i<14; j++) {
+        for (int j=0; j<14; j++) {
           last_str[i*14+i+j] = last[i][j];
         }
         last_str[i*14+i-1] = '\n';
@@ -157,7 +154,7 @@ int main() {
       score = getScore(last);
       // get last
       for (int i=0; i<8; i++) {
-        for (int j=0; i<14; j++) {
+        for (int j=0; j<14; j++) {
           last_str[i*14+i+j] = last[i][j];
         }
         last_str[i*14+i-1] = '\n';
@@ -189,5 +186,5 @@ int main() {
     }
   }
 
-
+  printf("End\n");
 }
