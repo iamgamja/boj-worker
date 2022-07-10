@@ -108,6 +108,9 @@ int compare (const void * a, const void * b) {
 
 
 int main() {
+  printf("Run!");
+  assert(0);
+
   srand(time(NULL));
 
   // read output.txt
