@@ -185,6 +185,4 @@ int main() {
       }
     }
   }
-
-  printf("End\n");
 }
