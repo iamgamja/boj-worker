@@ -10,13 +10,15 @@ jobs:
   job:
     name: Run Script
     runs-on: ubuntu-latest
+    env:
+      working-directory: './18789'
     steps:
-      - run: sudo chown -R ubuntu:ubuntu ubuntu
       - name: checkout
         uses: actions/checkout@v3
       - run: git pull origin main
-      # - run: python main.py md5 10000
-      - run: ./18789/main.exe 10000
+      - name: hi
+        run: ./18789/main.exe 10000
+        working-directory: ${{ env.working-directory }}
       - run: git config --global user.email "github-actions[bot]@users.noreply.github.com"
       - run: git config --global user.name "github-actions[bot]"
       - run: git add .
