@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
       - run: git pull origin main
       # - run: python main.py md5 10000
-      - run: ./18789/main 10000
+      - run: ./18789/main.exe 10000
       - run: git config --global user.email "github-actions[bot]@users.noreply.github.com"
       - run: git config --global user.name "github-actions[bot]"
       - run: git add .
