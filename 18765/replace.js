@@ -30,24 +30,13 @@ function primeFactors(n) {
   return answer
 }
 
-const cartesian = (...a) => {
-  return a.reduce((a, b) => {
-    return a.flatMap(d => {
-      return b.map(e => [d, e].flat())
-    })
-  });
-}
-const cartesian2 = (...a) => {
-  if (a.length === 0) return []
-  if (a.length === 1) return a
-  if (a.length === 2) return cartesian(...a)
-  return cartesian2(cartesian(...a.slice(0,2)), ...a.slice(2))
-}
+/** @type {(...a: any[][]) => any[]} */
+const cartesian =  (...a) => a.reduce(  (a, b) => a.map( c => b.map(d => [c, d].flat()) ).flat()  )
 
 for (let i in txt) {
   console.log(i)
 
-  cartesian2(
+  cartesian(
     ...primeFactors(i)
       .map(x => txt[x])
       .map(x => ['['+x+']', x])
@@ -61,10 +50,6 @@ for (let i in txt) {
       ''
     )
   )
-
-  sans( txt[i] + '*[!![]+!![]]' )
-
-  sans( txt[i].slice(1) )
 
 }
 
