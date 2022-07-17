@@ -1,0 +1,23 @@
+name: '18789'
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    branches: [ main ]
+
+jobs:
+  job:
+    name: Run Script
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - run: git pull origin main
+      # - run: python main.py md5 10000
+      - run: ./18789/main 10000
+      - run: git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - run: git config --global user.name "github-actions[bot]"
+      - run: git add .
+      - run: git commit -m "Apply automatic changes"
+      - run: git push origin main
