@@ -107,8 +107,12 @@ int compare(const void * a, const void * b) {
 }
 
 
-int main() {
+int main(int argc, char* args[]) {
   srand(time(NULL));
+
+  int count;
+  if (argc == 1) count = 10000;
+  else count = atoi(args[1]);
 
   // read output.txt
   char buffer[SIZE] = {0, };
@@ -119,7 +123,7 @@ int main() {
   
   getScore(last);
 
-  while (true) {
+  for (int loopcount=0; loopcount<count; loopcount++) {
     loop = true;
     for (int i=0; i<8; i++) {
       printf("i: %d, score: %d\n", i, score);
