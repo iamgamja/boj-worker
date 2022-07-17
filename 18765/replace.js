@@ -7,64 +7,66 @@ const txt = fs.readFileSync('output.txt').toString().replace(/\r\n/g, '\n').spli
 const firstLength = txt.join('\n').length
 
 
-for (let i of txt) {
-  console.count()
-
-  const target = i.replace(
-    '!-',
-    ''
-  )
-
-  // const target = i + '*[!![]+!![]]'
-
-  // const target = i.slice(1)
-
+function sans(target) {
   solve(txt, target,           false)
   solve(txt, target + '+!![]', false)
   solve(txt, target + '-!![]', false)
   solve(txt, target + '+[]',   false)
   solve(txt, target + '-[]',   false)
-
 }
 
-// for (let ii=0; ii<=1000; ii++) {
-//   console.count('i')
-//   const i = txt[ii]
-//   for (let jj=ii; ii*jj<=1000 && jj<=1000; jj++) {
-//     const j = txt[jj]
-//     const targets = [
-//       `${i}*${j}`,
-//       `[${i}]*${j}`,
-//       `${i}*[${j}]`,
-//       `[${i}]*[${j}]`,
+function primeFactors(n) {
+  const answer = []
 
-//       `${i.slice(0,-3)}*${j}`,
-//       `[${i.slice(0,-3)}]*${j}`,
-//       `${i.slice(0,-3)}*[${j}]`,
-//       `[${i.slice(0,-3)}]*[${j}]`,
+  for (let i = 2; i * i <= n; i += 1) {
+    while (n % i === 0) {
+      answer.push(i)
+      n /= i
+    }
+  }
 
-//       `${i}*${j.slice(0,-3)}`,
-//       `[${i}]*${j.slice(0,-3)}`,
-//       `${i}*[${j.slice(0,-3)}]`,
-//       `[${i}]*[${j.slice(0,-3)}]`,
+  if (n > 1)
+    answer.push(n)
+  return answer
+}
 
-//       `${i.slice(0,-3)}*${j.slice(0,-3)}`,
-//       `[${i.slice(0,-3)}]*${j.slice(0,-3)}`,
-//       `${i.slice(0,-3)}*[${j.slice(0,-3)}]`,
-//       `[${i.slice(0,-3)}]*[${j.slice(0,-3)}]`,
-//     ]
+const cartesian = (...a) => {
+  return a.reduce((a, b) => {
+    return a.flatMap(d => {
+      return b.map(e => [d, e].flat())
+    })
+  });
+}
+const cartesian2 = (...a) => {
+  if (a.length === 0) return []
+  if (a.length === 1) return a
+  if (a.length === 2) return cartesian(...a)
+  return cartesian2(cartesian(...a.slice(0,2)), ...a.slice(2))
+}
 
-//     for (let target of targets) {
-//       solve(txt, target,           false)
-//       solve(txt, target + '+!![]', false)
-//       solve(txt, target + '-!![]', false)
-//       solve(txt, target + '+[]',   false)
-//       solve(txt, target + '-[]',   false)
-//     }
+for (let i in txt) {
+  console.log(i)
 
-//   }
-// }
+  cartesian2(
+    ...primeFactors(i)
+      .map(x => txt[x])
+      .map(x => ['['+x+']', x])
+  ).map(
+    x => x.join('*')
+  ).forEach(sans)
 
+  sans(
+    txt[i].replace(
+      '!-',
+      ''
+    )
+  )
+
+  sans( txt[i] + '*[!![]+!![]]' )
+
+  sans( txt[i].slice(1) )
+
+}
 
 fs.writeFileSync('output.txt', txt.join('\n'))
 

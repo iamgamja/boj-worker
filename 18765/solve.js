@@ -1,4 +1,4 @@
-module.exports = function solve(txt, target= false, debug=true) {
+module.exports = function solve(txt, target=false, debug=true) {
   if (!target) return;
 
   const [err, result] = (() => {
