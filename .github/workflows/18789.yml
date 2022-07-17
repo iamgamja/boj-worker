@@ -10,15 +10,13 @@ jobs:
   job:
     name: Run Script
     runs-on: ubuntu-latest
-    env:
-      working-directory: './18789'
     steps:
       - name: checkout
         uses: actions/checkout@v3
       - run: git pull origin main
-      - name: hi
-        run: ./18789/main.exe 10000
-        working-directory: ${{ env.working-directory }}
+      - name: Run
+        run: ./main.exe 10000
+        working-directory: './18789'
       - run: git config --global user.email "github-actions[bot]@users.noreply.github.com"
       - run: git config --global user.name "github-actions[bot]"
       - run: git add .
