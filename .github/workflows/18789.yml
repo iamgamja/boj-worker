@@ -14,12 +14,12 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
       - run: git pull origin main
-      - name: Run
+      - name: Run main.exe
         run: ./main.exe 5000
         working-directory: './18789'
       - run: git config --global user.email "github-actions[bot]@users.noreply.github.com"
       - run: git config --global user.name "github-actions[bot]"
-      - name: hi
+      - name: Run git add
         run: git add ./save
         working-directory: './18789'
       - run: git commit -m "Apply automatic changes"
