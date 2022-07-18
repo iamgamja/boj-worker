@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
       - run: git pull origin main
       - name: Run
-        run: ./main.exe 10000
+        run: ./main.exe 1000
         working-directory: './18789'
       - run: git config --global user.email "github-actions[bot]@users.noreply.github.com"
       - run: git config --global user.name "github-actions[bot]"
