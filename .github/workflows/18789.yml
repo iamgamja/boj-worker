@@ -11,16 +11,10 @@ jobs:
     name: Run Script
     runs-on: windows-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - run: git pull origin main
-      - name: Run main.exe
-        run: ./main.exe 5000
+      - run: ./main.exe 5000
         working-directory: './18789'
-      - run: git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      - run: git config --global user.name "github-actions[bot]"
-      - name: Run git add
-        run: git add ./save
-        working-directory: './18789'
-      - run: git commit -m "Apply automatic changes"
-      - run: git push origin main
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          file_pattern: ./save/*
