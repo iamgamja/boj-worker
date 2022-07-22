@@ -12,7 +12,6 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: git pull origin main
       - run: ./18789/main.exe 5000
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
