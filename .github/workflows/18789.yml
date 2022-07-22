@@ -13,8 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: git pull origin main
-      - run: ./main.exe 5000
-        working-directory: './18789'
+      - run: /18789/main.exe 5000
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          file_pattern: ./save/*
+          file_pattern: /18789/save/*
