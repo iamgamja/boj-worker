@@ -20,7 +20,7 @@ jobs:
             print("Directory contents:")
             for f in os.listdir('./18789/save/'):
                 print(f)
-      - run: ./18789/main.exe 5000
+      - run: ./18789/main.exe 100
       - uses: jannekem/run-python-script-action@v1
         with:
           script: |
