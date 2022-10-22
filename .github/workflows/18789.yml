@@ -12,24 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v2
-      - uses: jannekem/run-python-script-action@v1
-        with:
-          script: |
-            import os
-            print("Directory contents:")
-            for f in os.listdir('./18789/save/'):
-                print(f)
       - uses: egor-tensin/setup-gcc@v1
+      - run: tree
       - run: gcc ./18789/main.c -o ./18789/main.exe
       - run: ./18789/main.exe 100
-      - uses: jannekem/run-python-script-action@v1
-        with:
-          script: |
-            import os
-            print("Directory contents:")
-            for f in os.listdir('./18789/save/'):
-                print(f)
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           file_pattern: ./18789/save/
