@@ -12,7 +12,8 @@
 
 void writeFileWithPath(char path[], char s[])
 {
-  printf("debug: writeFileWithPath, %s", path);
+  printf("writeFileWithPath call\n");
+  printf("debug: writeFileWithPath, %s\n", path);
   FILE *fp = fopen(path, "w");
   if (fp == NULL)
   {
@@ -145,6 +146,8 @@ int compare(const void *a, const void *b)
 
 int main(int argc, char *args[])
 {
+  printf("start\n");
+
   srand(time(NULL));
 
   int count;
@@ -152,6 +155,8 @@ int main(int argc, char *args[])
     count = 10000;
   else
     count = atoi(args[1]);
+
+  printf("now read output.txt");
 
   // read output.txt
   char buffer[SIZE] = {
