@@ -13,6 +13,11 @@
 void writeFileWithPath(char path[], char s[])
 {
   FILE *fp = fopen(path, "w");
+  if (fp == NULL)
+  {
+    printf("cannot open file");
+    exit(1);
+  }
   fputs(s, fp);
   fclose(fp);
 }
