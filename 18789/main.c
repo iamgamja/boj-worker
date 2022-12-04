@@ -127,7 +127,7 @@ int getScore(char x[][14])
       }
       last_str[i * 14 + i - 1] = '\n';
     }
-    writeFileWithPath("output.txt", last_str);
+    writeFileWithPath("./output.txt", last_str);
   }
   return r;
 }
@@ -151,7 +151,7 @@ int main(int argc, char *args[])
   char buffer[SIZE] = {
       0,
   };
-  FILE *fp = fopen("output.txt", "r");
+  FILE *fp = fopen("./output.txt", "r");
   fread(buffer, sizeof(buffer) - 1, 1, fp);
   fclose(fp);
   setLast(buffer);
@@ -252,7 +252,7 @@ int main(int argc, char *args[])
         }
         last_str[i * 14 + i - 1] = '\n';
       }
-      writeFileWithPath("output.txt", last_str);
+      writeFileWithPath("./output.txt", last_str);
     }
   }
 }
