@@ -12,10 +12,11 @@
 
 void writeFileWithPath(char path[], char s[])
 {
+  printf("debug: writeFileWithPath, %s", path);
   FILE *fp = fopen(path, "w");
   if (fp == NULL)
   {
-    printf("cannot open file");
+    printf("cannot open file\n");
     exit(1);
   }
   fputs(s, fp);
