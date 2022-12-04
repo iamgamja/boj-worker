@@ -15,7 +15,7 @@ jobs:
       - uses: egor-tensin/setup-gcc@v1
       - run: gcc ./18789/main.c -o ./18789/main.exe
       - run: tree
-      - run: ./18789/main.exe 100
+      - run: sudo ./18789/main.exe 100
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           file_pattern: ./18789/save/
